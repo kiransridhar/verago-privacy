@@ -84,12 +84,12 @@
   <p>A language-learning adventure for Kannada, Marathi &amp; Tamil</p>
 </header>
 <main>
-  <div class="tick" aria-hidden="true">✅</div>
-  <h2>Your email is confirmed</h2>
-  <p class="lead">Your Verago account is ready. Head back to the app to sign in —
+  <div class="tick" id="icon" aria-hidden="true">✅</div>
+  <h2 id="headline">Your email is confirmed</h2>
+  <p class="lead" id="lead">Your Verago account is ready. Head back to the app to sign in —
   your progress will follow you to any device you sign in on.</p>
 
-  <div class="steps">
+  <div class="steps" id="steps">
     <ol>
       <li>Open <strong>Verago</strong> on your phone.</li>
       <li>Go to <strong>Settings → Account</strong> (or the sign-in screen on first launch).</li>
@@ -107,5 +107,35 @@
 <footer>
   <a href="./index.html">Privacy policy</a>
 </footer>
+
+<script>
+  // Supabase sends people here whether the token verified or not: a bad or
+  // already-used link arrives as
+  //   confirmed.html#error=access_denied&error_code=otp_expired&...
+  // Without this, an expired link still showed "Your email is confirmed",
+  // and the person would then fail to sign in with no idea why.
+  (function () {
+    var hash = window.location.hash || '';
+    if (hash.indexOf('error') === -1) return;
+
+    var params = new URLSearchParams(hash.replace(/^#/, ''));
+    var code = params.get('error_code') || '';
+    var expired = code.indexOf('expired') !== -1;
+
+    document.getElementById('icon').textContent = expired ? '⌛' : '⚠️';
+    document.getElementById('headline').textContent = expired
+      ? 'That link has expired'
+      : 'That link didn’t work';
+    document.getElementById('lead').textContent = expired
+      ? 'Confirmation links are only good for a short while, and each one can be used once. Nothing is wrong with your account — you just need a fresh link.'
+      : 'We couldn’t confirm your email with that link. It may already have been used.';
+    document.getElementById('steps').innerHTML =
+      '<ol>' +
+      '<li>Open <strong>Verago</strong> and try to <strong>Sign In</strong> — if your email was already confirmed, you are good to go.</li>' +
+      '<li>If it says your email is not confirmed, create the account again with the same address to get a new link.</li>' +
+      '<li>Still stuck? Email <a href="mailto:link773@gmail.com">link773@gmail.com</a>.</li>' +
+      '</ol>';
+  })();
+</script>
 </body>
 </html>
