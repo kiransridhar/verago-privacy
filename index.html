@@ -46,22 +46,27 @@
   <p>A language-learning adventure for Kannada, Marathi &amp; Tamil</p>
 </header>
 <main>
-  <p class="updated"><em>Last updated: 2026-07-13</em></p>
+  <p class="updated"><em>Last updated: 2026-07-25</em></p>
 
   <p>Verago ("the app") is built by Kiran Sridhar. This policy explains what
   information the app does and does not collect. Keeping it short on purpose —
   there isn't much to say, because almost nothing leaves your device.</p>
 
   <h2>What we collect</h2>
-  <p><strong>By default, nothing is sent to a server.</strong> The app has no
-  analytics tracking of you, no advertising, and works entirely offline.</p>
+  <p>The app has <strong>no advertising and no third-party tracking</strong>,
+  and it plays fully offline. Unless you create an optional account (next
+  section), your learning progress never leaves your device; the only things
+  that do are the crash reports, update checks and speech recognition
+  described below.</p>
   <p>The following data is stored <strong>only on your device</strong>:</p>
   <ul>
     <li>Your XP, level, streak, completed locations, and achievements</li>
     <li>Your onboarding status and settings (vibration toggle, etc.)</li>
-    <li>A list of questions you got wrong, used to populate Practice mode</li>
+    <li>A list of questions you got wrong, used to populate Review mode</li>
+    <li>Usage counts powering a developer-only Analytics screen — these are
+    never transmitted</li>
   </ul>
-  <p>You can erase all of this at any time from
+  <p>You can erase the progress on this device at any time from
   <strong>Settings → Reset All Progress</strong>.</p>
 
   <h2>Optional account &amp; cloud sync</h2>
@@ -83,17 +88,40 @@
   erases your account and all cloud-saved data. If you never sign in, no
   account data exists and the app remains fully offline.</p>
 
-  <h2>Microphone</h2>
-  <p>The Voice Practice feature records you saying a word so you can play it
-  back and compare it against a reference pronunciation. These recordings:</p>
+  <h2>Microphone &amp; speech recognition</h2>
+  <p>The optional Voice Practice feature listens to you saying a word and
+  scores how close your pronunciation was. To turn speech into text it uses
+  <strong>your device's own speech-recognition service</strong> — Apple's on
+  iOS, Google's on Android. That means:</p>
   <ul>
-    <li>Are stored in the app's temporary directory on your device</li>
-    <li>Are <strong>never uploaded</strong> anywhere</li>
-    <li>Are discarded when you move to the next word or close the app</li>
+    <li>Your audio is processed by that service, which <strong>may transmit it
+    to Apple or Google</strong> for transcription, exactly as system dictation
+    does. Their handling is governed by their own privacy policies.</li>
+    <li><strong>The developer never receives your audio or your
+    transcript.</strong> The pronunciation score is computed on your device
+    and then discarded.</li>
+    <li>No recording is stored on the device after scoring, and none is ever
+    uploaded to us.</li>
   </ul>
-  <p>The app requests microphone permission the first time you open Voice
-  Practice. You can revoke this permission at any time in your device's
-  system settings; the rest of the app will continue to work normally.</p>
+  <p>The app requests microphone and speech-recognition permission the first
+  time you open Voice Practice. You can decline or revoke it at any time in
+  your device's system settings; the rest of the app will continue to work
+  normally.</p>
+
+  <h2>Crash reports and update checks</h2>
+  <p>Two small automatic calls leave the device. Neither contains your name,
+  email, location, or game progress:</p>
+  <ul>
+    <li><strong>Crash reports (Sentry).</strong> If the app crashes, the error
+    message, the JavaScript stack trace and which component failed are sent to
+    Sentry so the bug can be fixed. The app version, OS version and device
+    model travel with the report. File paths and internal storage keys are
+    stripped out before anything is sent, and no personal identifiers are
+    attached.</li>
+    <li><strong>Update checks (Expo Updates).</strong> On cold start the app
+    asks Expo's servers whether a newer JavaScript bundle exists for your
+    installed version. Only the app version and update channel are sent.</li>
+  </ul>
 
   <h2>Speech playback</h2>
   <p>The app uses your device's built-in text-to-speech engine to pronounce
